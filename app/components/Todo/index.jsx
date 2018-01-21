@@ -49,6 +49,10 @@ class Todo extends Component {
     this.props.onTodoDeleted(this.props.id);
   }
 
+  _onShareTodo() {
+    this.props.onTodoShared(this.props.id);
+  }
+
   _onChecked(e) {
     this.props.onTodoUpdated(this.props.id, {isDone: !this.props.isDone});
   }
@@ -75,6 +79,7 @@ class Todo extends Component {
               <div className="row">
                 <i className="fa fa-pencil ctrl-icon" title="edit" onClick={this._toggleEditForm}></i>
                 <i className="fa fa-remove ctrl-icon" title="delete" onClick={this._onDeleteTodo}></i>
+                <i className="fa fa-share-alt ctrl-icon" title="delete" onClick={this._onShareTodo}></i>
               </div>
             </div>
           </div>

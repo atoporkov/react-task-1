@@ -2,7 +2,10 @@ import axios from 'axios';
 
 import APP_CONFIG from '../config';
 
-export const   FETCH_TODOS_FULFILLED = 'FETCH_TODOS_FULFILLED',
+export const   FETCH_TODOS_FULFILLED_GET = 'FETCH_TODOS_FULFILLED_GET',
+               FETCH_TODOS_FULFILLED_PUT = 'FETCH_TODOS_FULFILLED_PUT',
+               FETCH_TODOS_FULFILLED_POST = 'FETCH_TODOS_FULFILLED_POST',
+               FETCH_TODOS_FULFILLED_DELETE = 'FETCH_TODOS_FULFILLED_DELETE',
                FETCH_TODOS_REJECTED = 'FETCH_TODOS_REJECTED',
                FETCH_TODOS_BY_QUERY = 'FETCH_TODOS_BY_QUERY';
 
@@ -14,7 +17,7 @@ export const getTodos = () =>
                     response => {
                         dispatch(
                             {
-                                type: FETCH_TODOS_FULFILLED,
+                                type: FETCH_TODOS_FULFILLED_GET,
                                 payload: response.data
                             }
                         );
@@ -39,7 +42,7 @@ export const addTodo = (data) =>
                     response => {
                         dispatch(
                             {
-                                type: FETCH_TODOS_FULFILLED,
+                                type: FETCH_TODOS_FULFILLED_POST,
                                 payload: response.data
                             }
                         );
@@ -63,7 +66,7 @@ export const updateTodo = (id, data) =>
                     response => {
                         dispatch(
                             {
-                                type: FETCH_TODOS_FULFILLED,
+                                type: FETCH_TODOS_FULFILLED_PUT,
                                 payload: response.data
                             }
                         );
@@ -87,7 +90,9 @@ export const deleteTodo = (id) =>
                     response => {
                         dispatch(
                             {
-                                type: FETCH_TODOS_FULFILLED
+                                type: FETCH_TODOS_FULFILLED_DELETE,
+                                // unfortunately json-server DELETE does not return deleted item id. payload: response.data should be below
+                                payload: id
                             }
                         );
                     }

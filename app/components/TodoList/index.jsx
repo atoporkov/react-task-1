@@ -61,6 +61,10 @@ class TodoList extends Component {
     this.props.onDeleteTodo(id);
   }
 
+  _onShareTodo(data) {
+    //TODO: share here
+  }
+
   render() {
     return (
         <div className={style['todo-list-component']}>
@@ -98,7 +102,7 @@ class TodoList extends Component {
               <ul className={style['list']}>
                 {
                   this.props.todos.data.map(todo =>
-                    <li key={todo.id}><Todo {...todo}
+                    <li key={todo.id}><Todo {...todo} onTodoShared={(data) => this._onShareTodo(data)}
                       onTodoUpdated={(id, data) => this._onUpdateTodo(id, data)} onTodoDeleted={(id) => this._onDeleteTodo(id)} /></li>
                   )
                 }
@@ -110,7 +114,6 @@ class TodoList extends Component {
 }
 
 let mapStateToProps = ({todos}) => {
-    console.log(todos);
     let filterTodos = (todos, query) =>
       todos.filter(todo => todo.title.includes(todos.query));
 

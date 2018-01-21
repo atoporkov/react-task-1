@@ -2,21 +2,12 @@
   "todos": [
     {
       "isActive": true,
-      "priority": "1",
-      "title": "Todo 2 edited",
-      "descr": "Description here",
-      "startDate": 1516406400000,
-      "dueDate": 1547942400000,
-      "id": 2
-    },
-    {
-      "id": 3,
-      "title": "Todo 3",
-      "descr": "Description here",
-      "priority": 0,
-      "isActive": true,
-      "startDate": "1516457354",
-      "dueDate": "1547993354"
+      "priority": "0",
+      "title": "1",
+      "descr": "1",
+      "startDate": 1515110400,
+      "dueDate": 1517356800,
+      "id": 1
     }
   ]
 }

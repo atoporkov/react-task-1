@@ -25,7 +25,7 @@ class TodoForm extends Component {
     Object.keys(this.refs).map(ref => {
         let field = this.refs[ref];
         if(field.type == 'date')
-            data[ref] = new Date(field.value).getTime();
+            data[ref] = new Date(field.value).getTime() / 1000;
         else
             data[ref] = field.value;
     });
@@ -35,7 +35,7 @@ class TodoForm extends Component {
 
   _getDate(date) {
     let d = new Date(date * 1000);
-    return d.getFullYear()+'-'+(d.getMonth() < 9 ? '0'+(d.getMonth()+1) : (d.getMonth()+1))+'-'+d.getDate();
+    return d.getFullYear()+'-'+(d.getMonth() < 9 ? '0'+(d.getMonth()+1) : (d.getMonth()+1))+'-'+(d.getDate() < 9 ? '0'+d.getDate() : d.getDate());
   }
 
   render() {
