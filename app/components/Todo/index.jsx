@@ -54,7 +54,7 @@ class Todo extends Component {
   }
 
   _onChecked(e) {
-    this.props.onTodoUpdated(this.props.id, {isDone: !this.props.isDone});
+    this.props.onTodoUpdated(this.props.id, {...this.props, isActive: !this.props.isActive});
   }
 
   render() {
