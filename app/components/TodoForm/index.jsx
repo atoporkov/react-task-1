@@ -14,6 +14,7 @@ class TodoForm extends Component {
     autobind(this);
   }
 
+  // handle form submit
   _onFormSubmit(e) {
     e.preventDefault();
 
@@ -22,6 +23,7 @@ class TodoForm extends Component {
         priority: 0
     };
 
+    // data collectiong using refs
     Object.keys(this.refs).map(ref => {
         let field = this.refs[ref];
         if(field.type == 'date')
@@ -33,6 +35,12 @@ class TodoForm extends Component {
     this.props.onSubmit(data);
   }
 
+  // handle form cancelation
+  _onFormCancel() {
+    this.props.onCancel();
+  }
+
+  // converting timestamp to user-friendly data
   _getDate(date) {
     let d = new Date(date * 1000);
     return d.getFullYear()+'-'+(d.getMonth() < 9 ? '0'+(d.getMonth()+1) : (d.getMonth()+1))+'-'+(d.getDate() < 9 ? '0'+d.getDate() : d.getDate());
@@ -41,6 +49,7 @@ class TodoForm extends Component {
   render() {
     return (
         <div className={style['todo-form-component']}>
+            <h4 style={{textAlign: "center"}}>{this.props.formHeader}</h4>
             <form onSubmit={this._onFormSubmit}>
                 <fieldset>
                     {/* Title group */}
@@ -63,6 +72,7 @@ class TodoForm extends Component {
                     <input type="date" ref="dueDate" id="dueDateInput" defaultValue={this._getDate(this.props.dueDate)} />
 
                     <input type="submit" value="Save" />
+                    <input type="button" style={{marginLeft: "10px"}} className="button-outline" onClick={this._onFormCancel} value="Cancel" />
                 </fieldset>
             </form>
         </div>

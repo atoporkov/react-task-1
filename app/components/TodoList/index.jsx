@@ -20,10 +20,12 @@ class TodoList extends Component {
     }
   }
 
+  // fetching data
   componentWillMount() {
     this.props.onGetTodos();
   }
 
+  // closing form after successful data fetching
   componentWillReceiveProps() {
     this.setState(
       {
@@ -32,6 +34,7 @@ class TodoList extends Component {
     );
   }
 
+  // toggle form visibility
   _onToggleTodoForm() {
     this.setState(
       {
@@ -40,31 +43,38 @@ class TodoList extends Component {
     );
   }
 
+  // reset user query
   _onFindTodoReset() {
     this.refs.findTodo.value = "";
     this.props.onFindTodo(null);
   }
 
+  // sorting
   _onChangeSorting() {
     this.props.onSortTodos(this.refs.sorting.value);
   }
 
+  // find todo by user query
   _onFindTodo() {
     this.props.onFindTodo(this.refs.findTodo.value);
   }
 
+  // add todo, TodoForm component event handler
   _onAddTodo(data) {
     this.props.onAddTodo(data);
   }
 
+  // update todo, Todo component event handler
   _onUpdateTodo(id, data) {
     this.props.onUpdateTodo(id, data);
   }
 
+  // add todo, Todo component event handler
   _onDeleteTodo(id) {
     this.props.onDeleteTodo(id);
   }
 
+  // share todo, Todo component event handler
   _onShareTodo(data) {
     //TODO: share here
   }
@@ -105,7 +115,7 @@ class TodoList extends Component {
                       <div className="column column-10"></div>
                       <div className="column column-80">
                         <hr />
-                        <TodoForm onSubmit={(data) => this._onAddTodo(data)} />
+                        <TodoForm formHeader={"Add ToDo"} onCancel={this._onToggleTodoForm} onSubmit={(data) => this._onAddTodo(data)} />
                       </div>
                       <div className="column column-10"></div>
                     </div>)
@@ -128,6 +138,7 @@ class TodoList extends Component {
   }
 }
 
+// sort function, returns function depends on sorting type selected by user
 let sortFunc = (type) => {
   switch(type) {
     case 'PRIORITY_ASC':

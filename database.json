@@ -3,19 +3,28 @@
     {
       "isActive": true,
       "priority": "2",
-      "title": "234",
-      "descr": "234",
-      "startDate": 1515888000,
-      "dueDate": 1516492800,
+      "title": "Buy presents",
+      "descr": "Mom, sister, friends",
+      "startDate": 1516579200,
+      "dueDate": 1517270400,
+      "id": 1
+    },
+    {
+      "isActive": true,
+      "priority": "1",
+      "title": "Get PESEL",
+      "descr": "",
+      "startDate": 1516579200,
+      "dueDate": 1517356800,
       "id": 2
     },
     {
       "isActive": true,
       "priority": "0",
-      "title": "123123123",
-      "descr": "123",
-      "startDate": 1515024000,
-      "dueDate": 1517270400,
+      "title": "Find car to purchase",
+      "descr": "Grand Vitara, Santa Fe, Sorento, RAV4, Captiva",
+      "startDate": 1516579200,
+      "dueDate": 1519776000,
       "id": 3
     }
   ]

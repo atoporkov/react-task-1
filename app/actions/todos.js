@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import APP_CONFIG from '../config';
 
+// actions const here
 export const   FETCH_TODOS_FULFILLED_GET = 'FETCH_TODOS_FULFILLED_GET',
                FETCH_TODOS_FULFILLED_PUT = 'FETCH_TODOS_FULFILLED_PUT',
                FETCH_TODOS_FULFILLED_POST = 'FETCH_TODOS_FULFILLED_POST',
@@ -33,7 +34,6 @@ export const getTodos = () =>
                     );
                 })
     }
-
 
 export const addTodo = (data) =>
     dispatch => {

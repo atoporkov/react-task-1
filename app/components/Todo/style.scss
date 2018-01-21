@@ -13,6 +13,9 @@
         .ctrl-icon{
             padding: 5px;
             cursor: pointer;
+            &:hover {
+                color: #9b4dca;
+            }
         }
     }
 }
