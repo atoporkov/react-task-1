@@ -1,0 +1,18 @@
+.todo-component{
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    .todo-title {
+        margin-left: 5px;
+    }
+    .todo-priority {
+        font-weight: 700;
+    }
+    .ctrl-container {
+        text-align: right;
+        .ctrl-icon{
+            padding: 5px;
+            cursor: pointer;
+        }
+    }
+}

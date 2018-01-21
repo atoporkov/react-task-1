@@ -1,0 +1,28 @@
+.todo-list-component {
+    .todo-list-header {
+        text-align: center;
+    }
+    .btn-ctrl {
+        width: 80%;
+    }
+    .list-wrapper {
+        padding: 10px 50px;
+        .list {
+            list-style: none;
+            li {
+                border: 0.1rem solid #d1d1d1;
+                border-radius: .4rem;
+                min-height: 100px;
+            }
+        }
+    }
+    .find-input-container {
+        position: relative;
+        .reset-query {
+            position: absolute;
+            cursor: pointer;
+            top: 9px;
+            right: 19px;
+        }
+    }
+}
