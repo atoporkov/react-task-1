@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, hashHistory, Route } from 'react-router';
+import { Router, browserHistory, Route } from 'react-router';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 
@@ -13,13 +13,12 @@ import Home from './scenes/Home';
 
 import store from './store';
 
-const history = syncHistoryWithStore(hashHistory, store);
+const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/" exact component={Home}/>
-            {/* <Route path="*" component={ErrorHandler}/> */}
+            <Route path="/" component={Home}/>
         </Router>
     </Provider>,
     document.getElementById('app')

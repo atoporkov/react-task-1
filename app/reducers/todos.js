@@ -1,9 +1,10 @@
 import { FETCH_TODOS_FULFILLED_GET, FETCH_TODOS_FULFILLED_DELETE, FETCH_TODOS_FULFILLED_PUT, FETCH_TODOS_FULFILLED_POST,
-	 FETCH_TODOS_REJECTED, FETCH_TODOS_BY_QUERY } from '../actions/todos';
+	 FETCH_TODOS_REJECTED, FETCH_TODOS_BY_QUERY, FETCH_TODOS_SORTING } from '../actions/todos';
 
 export default function todos (state = {
 	data: [],
 	query: null,
+	sorting: 'DUEDATE_DESC',
 	error: null
 }, action) {
 	switch(action.type){
@@ -24,6 +25,9 @@ export default function todos (state = {
 		}
 		case FETCH_TODOS_BY_QUERY: {
 			return {...state, query: action.payload ? action.payload : null}
+		}
+		case FETCH_TODOS_SORTING: {
+			return {...state, sorting: action.payload ? action.payload : 'DUEDATE_DESC'}
 		}
 		default: {
 			return state;

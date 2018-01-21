@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 
-import Auth from '../../components/Auth';
+import APP_CONFIG from '../../config';
 
 import style from './style.scss';
 
@@ -10,6 +10,7 @@ class Login extends Component {
   constructor() {
     super();
   }
+
   render() {
     return (
         <div className={style['login-scene']}>

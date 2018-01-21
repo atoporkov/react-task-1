@@ -3,6 +3,9 @@ const CONFIG = {
         host: "http://localhost",
         port: "3000"
     },
+    fb: {
+        appId: "1427880447340639"
+    },
     todo: {
         priority: {
             0: {

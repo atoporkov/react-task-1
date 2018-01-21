@@ -7,6 +7,7 @@ export const   FETCH_TODOS_FULFILLED_GET = 'FETCH_TODOS_FULFILLED_GET',
                FETCH_TODOS_FULFILLED_POST = 'FETCH_TODOS_FULFILLED_POST',
                FETCH_TODOS_FULFILLED_DELETE = 'FETCH_TODOS_FULFILLED_DELETE',
                FETCH_TODOS_REJECTED = 'FETCH_TODOS_REJECTED',
+               FETCH_TODOS_SORTING = 'FETCH_TODOS_SORTING',
                FETCH_TODOS_BY_QUERY = 'FETCH_TODOS_BY_QUERY';
 
 export const getTodos = () =>
@@ -111,5 +112,12 @@ export const findTodo = (payload) =>
     dispatch =>
         dispatch({
             type: FETCH_TODOS_BY_QUERY,
+            payload
+        });
+
+export const sortTodos = (payload) =>
+    dispatch =>
+        dispatch({
+            type: FETCH_TODOS_SORTING,
             payload
         });

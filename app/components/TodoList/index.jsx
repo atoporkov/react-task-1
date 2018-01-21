@@ -6,7 +6,7 @@ import autobind from 'react-autobind';
 import Todo from '../Todo';
 import TodoForm from '../TodoForm';
 
-import { getTodos, addTodo, updateTodo, deleteTodo, findTodo } from '../../actions/todos';
+import { getTodos, addTodo, updateTodo, deleteTodo, findTodo, sortTodos } from '../../actions/todos';
 
 import style from './style.scss';
 
@@ -21,7 +21,7 @@ class TodoList extends Component {
   }
 
   componentWillMount() {
-      this.props.onGetTodos();
+    this.props.onGetTodos();
   }
 
   componentWillReceiveProps() {
@@ -45,8 +45,12 @@ class TodoList extends Component {
     this.props.onFindTodo(null);
   }
 
+  _onChangeSorting() {
+    this.props.onSortTodos(this.refs.sorting.value);
+  }
+
   _onFindTodo() {
-      this.props.onFindTodo(this.refs.findTodo.value);
+    this.props.onFindTodo(this.refs.findTodo.value);
   }
 
   _onAddTodo(data) {
@@ -73,7 +77,7 @@ class TodoList extends Component {
               <div className="column column-10"></div>
               <div className="column column-80">
                 <div className="row">
-                  <div className="column column-60 find-input-container">
+                  <div className="column column-40 find-input-container">
                     <input ref="findTodo" type="text" placeholder="Todo name here..." />
                     {this.props.todos.query ? <i title="reset" className="fa fa-remove reset-query" onClick={this._onFindTodoReset}></i> : null}
                   </div>
@@ -83,6 +87,16 @@ class TodoList extends Component {
                   <div className="column column-20">
                     <button className="btn-ctrl" onClick={this._onToggleTodoForm}>Add</button>
                   </div>
+                  <div className="column column-20">
+                    <select ref="sorting" onChange={this._onChangeSorting} defaultValue="DUEDATE_DESC">
+                      <option value="PRIORITY_ASC">Priority asc</option>
+                      <option value="PRIORITY_DESC">Priority desc</option>
+                      <option value="DUEDATE_ASC">Due date asc</option>
+                      <option value="DUEDATE_DESC">Due date desc</option>
+                      <option value="STARTDATE_ASC">Start date asc</option>
+                      <option value="STARTDATE_DESC">Start date desc</option>
+                    </select>
+                  </div>
                 </div>
                 {
                   !this.state.showForm ? null
@@ -90,6 +104,7 @@ class TodoList extends Component {
                     (<div className="row">
                       <div className="column column-10"></div>
                       <div className="column column-80">
+                        <hr />
                         <TodoForm onSubmit={(data) => this._onAddTodo(data)} />
                       </div>
                       <div className="column column-10"></div>
@@ -102,7 +117,7 @@ class TodoList extends Component {
               <ul className={style['list']}>
                 {
                   this.props.todos.data.map(todo =>
-                    <li key={todo.id}><Todo {...todo} onTodoShared={(data) => this._onShareTodo(data)}
+                    <li className={!todo.isActive ? 'todo-inactive' : ''} key={todo.id}><Todo {...todo} onTodoShared={(data) => this._onShareTodo(data)}
                       onTodoUpdated={(id, data) => this._onUpdateTodo(id, data)} onTodoDeleted={(id) => this._onDeleteTodo(id)} /></li>
                   )
                 }
@@ -113,14 +128,36 @@ class TodoList extends Component {
   }
 }
 
+let sortFunc = (type) => {
+  switch(type) {
+    case 'PRIORITY_ASC':
+      return (a, b) => a.priority - b.priority;
+    break;
+    case 'PRIORITY_DESC':
+      return (a, b) => b.priority - a.priority;
+    break;
+    case 'DUEDATE_ASC':
+      return (a, b) => a.dueDate - b.dueDate;
+    break;
+    case 'DUEDATE_DESC':
+      return (a, b) => b.dueDate - a.dueDate;
+    break;
+    case 'STARTDATE_ASC':
+      return (a, b) => a.startDate - b.startDate;
+    break;
+    case 'STARTDATE_DESC':
+      return (a, b) => b.startDate - a.startDate;
+    break;
+  }
+}
+
 let mapStateToProps = ({todos}) => {
-    let filterTodos = (todos, query) =>
-      todos.filter(todo => todo.title.includes(todos.query));
+    let filterTodos = (todos, query) => todos.filter(todo => todo.title.includes(query));
 
     let _todos = !todos.query ? todos : {...todos, data: filterTodos(todos.data,todos.query)};
 
     return {
-        todos: {...todos, data: _todos.data.sort((a, b) => a.dueDate - b.dueDate)}
+        todos: {...todos, data: _todos.data.sort(sortFunc(todos.sorting))}
     }
 }
 
@@ -140,6 +177,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         onDeleteTodo: (id) => {
             dispatch(deleteTodo(id));
+        },
+        onSortTodos: (type) => {
+            dispatch(sortTodos(type));
         }
     }
 }
